@@ -9,5 +9,5 @@ install:
   - composer require drush/drush:6.*
 
 before_script:
-  - mysql -e 'CREATE DATABASE travis CHARACTER SET utf8 COLLATE utf8_general_ci;'
-  - php ${TRAVIS_BUILD_DIR}/vendor/bin/drush.php
+  # - mysql -e 'CREATE DATABASE travis CHARACTER SET utf8 COLLATE utf8_general_ci;'
+  - php ${TRAVIS_BUILD_DIR}/vendor/bin/drush.php si minimal --db-su=root --db-url=mysql://travis@127.0.0.1/travis
