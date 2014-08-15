@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "==========================================================="
+echo "POST_STOP_PHP-5.4 HOOK: Giving write access to settings.php"
+echo "==========================================================="
+chmod u+w ${OPENSHIFT_REPO_DIR}sites/fb.elabee.me/
+chmod u+w ${OPENSHIFT_REPO_DIR}sites/fb.elabee.me/settings.php

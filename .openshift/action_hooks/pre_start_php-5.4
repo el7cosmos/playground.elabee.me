@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "==========================================================="
+echo "PRE_START_PHP-5.4 HOOK: Revoke write access to settings.php"
+echo "==========================================================="
+chmod a-w ${OPENSHIFT_REPO_DIR}sites/fb.elabee.me/
+chmod a-w ${OPENSHIFT_REPO_DIR}sites/fb.elabee.me/settings.php
