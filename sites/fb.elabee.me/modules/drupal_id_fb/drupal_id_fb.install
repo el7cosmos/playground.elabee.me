@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * Implements hook_uninstall().
+ */
+function drupal_id_fb_uninstall() {
+  variable_del('drupal_id_fb_group');
+  variable_del('drupal_id_fb_message');
+}

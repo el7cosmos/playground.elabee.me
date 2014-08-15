@@ -1,0 +1,50 @@
+<?php
+/**
+ * @file
+ * Code for the Drupal Indonesia Facebook Group feature.
+ */
+
+include_once 'drupal_id_fb.features.inc';
+/**
+ * @file
+ * Code for the Drupal Indonesia Facebook Group feature.
+ */
+
+/**
+ * Implements hook_feeds_after_save().
+ */
+function drupal_id_fb_feeds_after_save(FeedsSource $source, $entity, $item, $entity_id) {
+  if ($fb_group = variable_get('drupal_id_fb_group', FALSE)) {
+    $path = $fb_group . '/feed';
+    $params = array(
+      'message' => variable_get('drupal_id_fb_message'),
+      'link' => $item['url'],
+      'picture' => 'https://www.drupal.org/files/drupal%208%20logo%20isolated%20CMYK%2072.png',
+      'name' => $item['title'],
+    );
+
+    fb_graph_post($path, $params);
+  }
+}
+
+/**
+ * Implementation of hook_form_FORM_ID_alter().
+ */
+function drupal_id_fb_form_fb_admin_default_token_form_alter(&$form, &$form_state, $form_id) {
+  $form['fb_admin_token_generate']['#scope'][] = 'user_groups';
+}
+
+/**
+ * Implements hook_menu().
+ */
+function drupal_id_fb_menu() {
+  $items['admin/config/fb/drupal-id'] = array(
+    'title' => 'Drupal Indonesia Facebook Group',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('drupal_id_fb_settings'),
+    'access arguments' => array('fb__administer'),
+    'file' => 'drupal_id_fb.admin.inc',
+  );
+
+  return $items;
+}

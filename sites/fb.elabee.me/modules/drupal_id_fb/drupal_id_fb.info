@@ -1,0 +1,17 @@
+name = Drupal Indonesia Facebook Group
+description = Post various drupal news to Drupal Indonesia group.
+core = 7.x
+package = Facebook - contrib
+dependencies[] = fb
+dependencies[] = features
+dependencies[] = feeds
+dependencies[] = wsclient_rest
+dependencies[] = wsclient_feeds
+features[ctools][] = feeds:feeds_importer_default:1
+features[features_api][] = api:2
+features[feeds_importer][] = drupal_news
+features[node][] = drupal_news
+features[wsclient_service][] = drupal
+features_exclude[dependencies][ctools] = ctools
+features_exclude[dependencies][entity] = entity
+features_exclude[dependencies][wsclient] = wsclient
