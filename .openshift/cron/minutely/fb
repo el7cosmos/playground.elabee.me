@@ -1,0 +1,3 @@
+#!/bin/bash
+
+${OPENSHIFT_HOME_DIR}.composer/vendor/bin/drush --root=${OPENSHIFT_REPO_DIR} --uri=http://fb.elabee.me --quiet cron
