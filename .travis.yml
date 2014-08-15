@@ -1,16 +1,21 @@
 language: php
-
 php:
-  - "5.4"
-
+- '5.4'
 services: mysql
-
 install:
-  - composer require drush/drush:6.*
-
+- composer require drush/drush:6.*
 before_script:
-  - php vendor/bin/drush.php site-install minimal --db-su=root --db-url=mysql://travis@127.0.0.1/travis --sites-subdir=travis --yes
-  - php vendor/bin/drush.php pm-enable simpletest --uri=http://travis --yes
-
+- php vendor/bin/drush.php site-install minimal --db-su=root --db-url=mysql://travis@127.0.0.1/travis
+  --sites-subdir=travis --yes
+- php vendor/bin/drush.php pm-enable simpletest --uri=http://travis --yes
 script:
-  - php vendor/bin/drush.php test-run FeedsUnitTestCase --uri=http://travis
+- php vendor/bin/drush.php test-run FeedsUnitTestCase --uri=http://travis
+deploy:
+  provider: openshift
+  user: el7cosmos@gmail.com
+  password:
+    secure: KPCORgbHcmaC9HxzUbDkg6CBo3M555d1BqPDYzoy387XFdb/kxUl9+jjTkPd/uPqAXDPkUxcLvk2k3BmG3RnQoIotS0aS0XETepOl/ctlMxs7Bkh/XKVvw6pJJvJkSiL3i2bIstxunzZIXBi+BmXWTmbo1/nAGa/Cbl8kftQ3b0=
+  app: playground
+  domain: elabee
+  on:
+    repo: el7cosmos/playground.elabee.me
